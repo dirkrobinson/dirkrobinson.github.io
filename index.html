@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nexus Learning Player</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        /* 1. Ensure the page takes up the full screen height */
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            overflow: hidden;
+            /* Prevent body scrollbars */
+        }
+
+        /* 2. Turn the main container into a Flex Row (Side-by-Side) */
+        .app-container {
+            display: flex;
+            /* This aligns children horizontally */
+            flex-direction: row;
+            /* Default is row, but stating it explicitly */
+            height: 100vh;
+            /* Force container to be full viewport height */
+            width: 100vw;
+        }
+
+        /* 3. Style the Left Pane (Video + Chapters) */
+        .left-pane {
+            flex: 1;
+            /* Takes up 50% of the space (or 1 portion) */
+            display: flex;
+            flex-direction: column;
+            /* Stacks Video and Chapters vertically inside this pane */
+            border-right: 1px solid #ddd;
+            /* Optional separator line */
+            min-width: 400px;
+            /* Prevent it from getting too squished */
+            background: #f9f9f9;
+        }
+
+        /* 4. Style the Right Pane (Browser Bar + Iframe) */
+        .right-pane {
+            flex: 1;
+            /* Takes up the other 50% */
+            display: flex;
+            flex-direction: column;
+            /* Stacks Bar and Iframe vertically */
+            background: #ffffff;
+        }
+
+        /* Helper: Ensure the iframe fills the remaining height of the right pane */
+        #content-frame {
+            flex-grow: 1;
+            width: 100%;
+            border: none;
+        }
+
+        /* Helper: Ensure video container doesn't overflow */
+        .video-container {
+            width: 100%;
+            /* You can add 'aspect-ratio: 16/9;' here if you want to enforce video shape */
+        }
+
+        .chapters-container {
+            flex-grow: 1;
+            /* Chapters take up remaining vertical space in left pane */
+            overflow-y: auto;
+            /* Scroll if chapters list is long */
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="app-container">
+        <div class="left-pane">
+            <div class="video-container">
+                <div id="player"></div>
+            </div>
+
+            <div class="chapters-container">
+                <div class="chapters-header">
+                    <h2>Chapters</h2>
+                    <span id="current-timestamp">00:00</span>
+                </div>
+                <div id="chapters-list" class="chapters-list">
+                </div>
+            </div>
+        </div>
+
+        <div class="right-pane">
+            <div class="browser-bar">
+                <span class="url-display" id="url-display">https://...</span>
+                <button class="btn-icon">Open External &#8599;</button>
+            </div>
+            <iframe id="content-frame" src="http://localhost:8000/local_test.html" title="Content Viewer"></iframe>
+        </div>
+    </div>
+
+    <script src="script.js?v=1"></script>
+</body>
+
+</html>
