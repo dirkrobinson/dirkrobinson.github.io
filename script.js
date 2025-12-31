@@ -4,22 +4,22 @@ const chapters = [
     {
         title: "Magic Pants",
         startTime: 0,
-        url: "http://localhost:8080/local_test.html#EXPR-3"
+        url: "https://dirkrobinson.github.io/local_test.html#EXPR-3"
     },
     {
         title: "Trippy Shit",
         startTime: 35,
-        url: "http://localhost:8080/local_test.html#ESCA-3"
+        url: "https://dirkrobinson.github.io/local_test.html#ESCA-3"
     },
     {
         title: "Diahreah",
         startTime: 54,
-        url: "http://localhost:8080/local_test.html#SPAR-1"
+        url: "https://dirkrobinson.github.io/local_test.html#SPAR-1"
     },
     {
         title: "Picnic Time",
         startTime: 106,
-        url: "http://localhost:8080/local_test.html#CUBI-6"
+        url: "https://dirkrobinson.github.io/local_test.html#CUBI-6"
     }
 ];
 
