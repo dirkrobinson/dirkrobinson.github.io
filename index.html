@@ -9,78 +9,12 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
-
-    <style>
-        /* 1. Ensure the page takes up the full screen height */
-        html,
-        body {
-            margin: 0;
-            padding: 0;
-            height: 100%;
-            overflow: hidden;
-            /* Prevent body scrollbars */
-        }
-
-        /* 2. Turn the main container into a Flex Row (Side-by-Side) */
-        .app-container {
-            display: flex;
-            /* This aligns children horizontally */
-            flex-direction: row;
-            /* Default is row, but stating it explicitly */
-            height: 100vh;
-            /* Force container to be full viewport height */
-            width: 100vw;
-        }
-
-        /* 3. Style the Left Pane (Video + Chapters) */
-        .left-pane {
-            flex: 1;
-            /* Takes up 50% of the space (or 1 portion) */
-            display: flex;
-            flex-direction: column;
-            /* Stacks Video and Chapters vertically inside this pane */
-            border-right: 1px solid #ddd;
-            /* Optional separator line */
-            min-width: 400px;
-            /* Prevent it from getting too squished */
-            background: #f9f9f9;
-        }
-
-        /* 4. Style the Right Pane (Browser Bar + Iframe) */
-        .right-pane {
-            flex: 1;
-            /* Takes up the other 50% */
-            display: flex;
-            flex-direction: column;
-            /* Stacks Bar and Iframe vertically */
-            background: #ffffff;
-        }
-
-        /* Helper: Ensure the iframe fills the remaining height of the right pane */
-        #content-frame {
-            flex-grow: 1;
-            width: 100%;
-            border: none;
-        }
-
-        /* Helper: Ensure video container doesn't overflow */
-        .video-container {
-            width: 100%;
-            /* You can add 'aspect-ratio: 16/9;' here if you want to enforce video shape */
-        }
-
-        .chapters-container {
-            flex-grow: 1;
-            /* Chapters take up remaining vertical space in left pane */
-            overflow-y: auto;
-            /* Scroll if chapters list is long */
-        }
-    </style>
 </head>
 
 <body>
 
     <div class="app-container">
+        <!-- LEFT PANE: Video Player -->
         <div class="left-pane">
             <div class="video-container">
                 <div id="player"></div>
@@ -96,16 +30,259 @@
             </div>
         </div>
 
+        <!-- RIGHT PANE: Content Views -->
         <div class="right-pane">
-            <div class="browser-bar">
-                <span class="url-display" id="url-display">https://...</span>
-                <button class="btn-icon">Open External &#8599;</button>
+
+            <!-- STEP 1: Selection View -->
+            <div id="step-1" class="view-section">
+                <div class="selection-header">
+                    <h3>Select Items</h3>
+                    <span id="selection-count">0 items selected</span>
+                </div>
+
+                <div class="image-grid" id="image-grid">
+                    <!-- Grid Content from local_test.html -->
+                    <div class="grid-item">
+                        <div class="sb-card item" id="BLUR-1" data-id="BLUR-1" data-desc="BLURRY 1 CRANBERRY">
+                            <div class="check-overlay">✔</div>
+                            <img src="https://cdn.estout.com/Images/BLUR-1.jpg?w=500" />
+                            <div class="desc">BLURRY 1 CRANBERRY</div>
+                        </div>
+                    </div>
+                    <div class="grid-item">
+                        <div class="sb-card item" id="WEBE-1" data-id="WEBE-1" data-desc="WEBER 1 SPICE">
+                            <div class="check-overlay">✔</div>
+                            <img src="https://cdn.estout.com/Images/WEBE-1.jpg?w=500" />
+                            <div class="desc">WEBER 1 SPICE</div>
+                        </div>
+                    </div>
+                    <div class="grid-item">
+                        <div class="sb-card item" id="EXPR-3" data-id="EXPR-3" data-desc="EXPRESS 3 JEWEL">
+                            <div class="check-overlay">✔</div>
+                            <img src="https://cdn.estout.com/Images/EXPR-3.jpg?w=500" />
+                            <div class="desc">EXPRESS 3 JEWEL</div>
+                        </div>
+                    </div>
+                    <div class="grid-item">
+                        <div class="sb-card item" id="GAVO-3" data-id="GAVO-3" data-desc="GAVOTTE 3 PEONY">
+                            <div class="check-overlay">✔</div>
+                            <img src="https://cdn.estout.com/Images/GAVO-3.jpg?w=500" />
+                            <div class="desc">GAVOTTE 3 PEONY</div>
+                        </div>
+                    </div>
+                    <div class="grid-item">
+                        <div class="sb-card item" id="ELOD-1" data-id="ELOD-1" data-desc="ELODIE 1 PUMPKIN">
+                            <div class="check-overlay">✔</div>
+                            <img src="https://cdn.estout.com/Images/ELOD-1.jpg?w=500" />
+                            <div class="desc">ELODIE 1 PUMPKIN</div>
+                        </div>
+                    </div>
+                    <div class="grid-item">
+                        <div class="sb-card item" id="DOLB-5" data-id="DOLB-5" data-desc="DOLBY 5 RUSSET">
+                            <div class="check-overlay">✔</div>
+                            <img src="https://cdn.estout.com/Images/DOLB-5.jpg?w=500" />
+                            <div class="desc">DOLBY 5 RUSSET</div>
+                        </div>
+                    </div>
+                    <div class="grid-item">
+                        <div class="sb-card item" id="THOR-4" data-id="THOR-4" data-desc="THORPE 4 PRIMROSE">
+                            <div class="check-overlay">✔</div>
+                            <img src="https://cdn.estout.com/Images/THOR-4.jpg?w=500" />
+                            <div class="desc">THORPE 4 PRIMROSE</div>
+                        </div>
+                    </div>
+                    <div class="grid-item">
+                        <div class="sb-card item" id="ACCR-2" data-id="ACCR-2" data-desc="ACCRUED 2 PARTYTIME">
+                            <div class="check-overlay">✔</div>
+                            <img src="https://cdn.estout.com/Images/ACCR-2.jpg?w=500" />
+                            <div class="desc">ACCRUED 2 PARTYTIME</div>
+                        </div>
+                    </div>
+                    <div class="grid-item">
+                        <div class="sb-card item" id="PING-2" data-id="PING-2" data-desc="PINGPONG 2 TEAROSE">
+                            <div class="check-overlay">✔</div>
+                            <img src="https://cdn.estout.com/Images/PING-2.jpg?w=500" />
+                            <div class="desc">PINGPONG 2 TEAROSE</div>
+                        </div>
+                    </div>
+                    <div class="grid-item">
+                        <div class="sb-card item" id="OFFI-1" data-id="OFFI-1" data-desc="OFFICIAL 1 SPICE">
+                            <div class="check-overlay">✔</div>
+                            <img src="https://cdn.estout.com/Images/OFFI-1.jpg?w=500" />
+                            <div class="desc">OFFICIAL 1 SPICE</div>
+                        </div>
+                    </div>
+                    <div class="grid-item">
+                        <div class="sb-card item" id="BAKU-2" data-id="BAKU-2" data-desc="BAKU 2 TOPAZ">
+                            <div class="check-overlay">✔</div>
+                            <img src="https://cdn.estout.com/Images/BAKU-2.jpg?w=500" />
+                            <div class="desc">BAKU 2 TOPAZ</div>
+                        </div>
+                    </div>
+                    <div class="grid-item">
+                        <div class="sb-card item" id="JABO-4" data-id="JABO-4" data-desc="JABOT 4 SUNSET">
+                            <div class="check-overlay">✔</div>
+                            <img src="https://cdn.estout.com/Images/JABO-4.jpg?w=500" />
+                            <div class="desc">JABOT 4 SUNSET</div>
+                        </div>
+                    </div>
+                    <div class="grid-item">
+                        <div class="sb-card item" id="ANTW-3" data-id="ANTW-3" data-desc="ANTWERP 3 BLUSH">
+                            <div class="check-overlay">✔</div>
+                            <img src="https://cdn.estout.com/Images/ANTW-3.jpg?w=500" />
+                            <div class="desc">ANTWERP 3 BLUSH</div>
+                        </div>
+                    </div>
+                    <div class="grid-item">
+                        <div class="sb-card item" id="ESCA-3" data-id="ESCA-3" data-desc="ESCAPADE 3 SUNSET">
+                            <div class="check-overlay">✔</div>
+                            <img src="https://cdn.estout.com/Images/ESCA-3.jpg?w=500" />
+                            <div class="desc">ESCAPADE 3 SUNSET</div>
+                        </div>
+                    </div>
+                    <div class="grid-item">
+                        <div class="sb-card item" id="MENT-1" data-id="MENT-1" data-desc="MENTION 1 PEACH">
+                            <div class="check-overlay">✔</div>
+                            <img src="https://cdn.estout.com/Images/MENT-1.jpg?w=500" />
+                            <div class="desc">MENTION 1 PEACH</div>
+                        </div>
+                    </div>
+                    <div class="grid-item">
+                        <div class="sb-card item" id="PART-1" data-id="PART-1" data-desc="PARTY 1 NECTAR">
+                            <div class="check-overlay">✔</div>
+                            <img src="https://cdn.estout.com/Images/PART-1.jpg?w=500" />
+                            <div class="desc">PARTY 1 NECTAR</div>
+                        </div>
+                    </div>
+                    <div class="grid-item">
+                        <div class="sb-card item" id="PENE-4" data-id="PENE-4" data-desc="PENELOPE 4 SALMON">
+                            <div class="check-overlay">✔</div>
+                            <img src="https://cdn.estout.com/Images/PENE-4.jpg?w=500" />
+                            <div class="desc">PENELOPE 4 SALMON</div>
+                        </div>
+                    </div>
+                    <div class="grid-item">
+                        <div class="sb-card item" id="INQU-4" data-id="INQU-4" data-desc="INQUIRE 4 CARNATION">
+                            <div class="check-overlay">✔</div>
+                            <img src="https://cdn.estout.com/Images/INQU-4.jpg?w=500" />
+                            <div class="desc">INQUIRE 4 CARNATION</div>
+                        </div>
+                    </div>
+                    <div class="grid-item">
+                        <div class="sb-card item" id="INGE-4" data-id="INGE-4" data-desc="INGENIOUS 4 BLUSH">
+                            <div class="check-overlay">✔</div>
+                            <img src="https://cdn.estout.com/Images/INGE-4.jpg?w=500" />
+                            <div class="desc">INGENIOUS 4 BLUSH</div>
+                        </div>
+                    </div>
+                    <div class="grid-item">
+                        <div class="sb-card item" id="SPAR-1" data-id="SPAR-1" data-desc="SPARKS 1 ROSEWOOD">
+                            <div class="check-overlay">✔</div>
+                            <img src="https://cdn.estout.com/Images/SPAR-1.jpg?w=500" />
+                            <div class="desc">SPARKS 1 ROSEWOOD</div>
+                        </div>
+                    </div>
+                    <div class="grid-item">
+                        <div class="sb-card item" id="NAVO-1" data-id="NAVO-1" data-desc="NAVODARI 1 ROSEBUD">
+                            <div class="check-overlay">✔</div>
+                            <img src="https://cdn.estout.com/Images/NAVO-1.jpg?w=500" />
+                            <div class="desc">NAVODARI 1 ROSEBUD</div>
+                        </div>
+                    </div>
+                    <div class="grid-item">
+                        <div class="sb-card item" id="MCCA-1" data-id="MCCA-1" data-desc="MCCARTHY 1 SORBET">
+                            <div class="check-overlay">✔</div>
+                            <img src="https://cdn.estout.com/Images/MCCA-1.jpg?w=500" />
+                            <div class="desc">MCCARTHY 1 SORBET</div>
+                        </div>
+                    </div>
+                    <div class="grid-item">
+                        <div class="sb-card item" id="BISO-1" data-id="BISO-1" data-desc="BISON 1 RASPBERRY">
+                            <div class="check-overlay">✔</div>
+                            <img src="https://cdn.estout.com/Images/BISO-1.jpg?w=500" />
+                            <div class="desc">BISON 1 RASPBERRY</div>
+                        </div>
+                    </div>
+                    <div class="grid-item">
+                        <div class="sb-card item" id="JABO-1" data-id="JABO-1" data-desc="JABOT 1 RHUBARB">
+                            <div class="check-overlay">✔</div>
+                            <img src="https://cdn.estout.com/Images/JABO-1.jpg?w=500" />
+                            <div class="desc">JABOT 1 RHUBARB</div>
+                        </div>
+                    </div>
+                    <div class="grid-item">
+                        <div class="sb-card item" id="WINN-1" data-id="WINN-1" data-desc="WINNING 1 PUNCH">
+                            <div class="check-overlay">✔</div>
+                            <img src="https://cdn.estout.com/Images/WINN-1.jpg?w=500" />
+                            <div class="desc">WINNING 1 PUNCH</div>
+                        </div>
+                    </div>
+                    <div class="grid-item">
+                        <div class="sb-card item" id="CONN-5" data-id="CONN-5" data-desc="CONNELL 5 SHOCKING">
+                            <div class="check-overlay">✔</div>
+                            <img src="https://cdn.estout.com/Images/CONN-5.jpg?w=500" />
+                            <div class="desc">CONNELL 5 SHOCKING</div>
+                        </div>
+                    </div>
+                    <div class="grid-item">
+                        <div class="sb-card item" id="MIXE-1" data-id="MIXE-1" data-desc="MIXEDBAG 1 RHUBARB">
+                            <div class="check-overlay">✔</div>
+                            <img src="https://cdn.estout.com/Images/MIXE-1.jpg?w=500" />
+                            <div class="desc">MIXEDBAG 1 RHUBARB</div>
+                        </div>
+                    </div>
+                    <div class="grid-item">
+                        <div class="sb-card item" id="CUBI-6" data-id="CUBI-6" data-desc="CUBISM 6 WATERMELON">
+                            <div class="check-overlay">✔</div>
+                            <img src="https://cdn.estout.com/Images/CUBI-6.jpg?w=500" />
+                            <div class="desc">CUBISM 6 WATERMELON</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="fab-container">
+                    <button id="add-to-cart-btn" class="btn-primary" disabled onclick="goToCheckout()">
+                        Add to Cart <span id="cart-count"></span>
+                    </button>
+                </div>
             </div>
-            <iframe id="content-frame" src="http://localhost:8000/local_test.html" title="Content Viewer"></iframe>
+
+            <!-- STEP 2: Checkout View -->
+            <div id="step-2" class="view-section hidden">
+                <div class="checkout-container">
+                    <div class="checkout-left">
+                        <button class="btn-back" onclick="goToStep(1)">
+                            &larr; Back to Selection
+                        </button>
+                        <h3>Your Cart</h3>
+                        <div id="cart-list">
+                            <!-- Populated via JS -->
+                        </div>
+                    </div>
+                    <div class="checkout-right">
+                        <h3>Shipping Details</h3>
+                        <form id="checkout-form" onsubmit="handleCheckout(event)">
+                            <div class="form-group">
+                                <label>Full Name</label>
+                                <input type="text" name="name" class="form-control" required placeholder="John Doe">
+                            </div>
+                            <div class="form-group">
+                                <label>Address</label>
+                                <input type="text" name="address" class="form-control" required
+                                    placeholder="123 Main St, City, Country">
+                            </div>
+                            <button type="submit" class="btn-primary" style="width: 100%">
+                                Submit Order
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </div>
 
-    <script src="script.js?v=1"></script>
+    <script src="script.js?v=3"></script>
 </body>
 
 </html>
